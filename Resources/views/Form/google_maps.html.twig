@@ -1,0 +1,56 @@
+{% block oh_google_maps_widget %}
+<div {{ block('widget_container_attributes') }}>
+	{% block oh_google_maps_html %} 
+	<div id="{{ id }}_container">
+		<input type="text" id="{{ id }}_input" /><button id="{{ id }}_search_button" class="btn">Search</button><br /><a href="#" id="{{ id }}_current_position">Current location</a>
+		<div id="{{ id }}_map_canvas" class="gmap" style="width: {{ map_width }}px; height: {{ map_height }}px"></div>
+		<div id="{{ id }}_error"></div>
+	</div>
+	{% endblock %}
+	{% block oh_google_maps_fields %} 
+		{% for child in form %}
+		    {{ form_row(child) }}
+        {% endfor %}
+	{% endblock %}
+	{% block oh_google_maps_javascripts %}
+		{% if include_jquery %}
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		{% endif %}
+		{% if include_gmaps_js %}
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		{% endif %}
+		{% javascripts
+			'@OhGoogleMapFormTypeBundle/Resources/public/js/jquery.ohgooglemaps.js'
+		%}
+		<script type="text/javascript" src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+	{% endblock %}
+	{% block oh_google_maps_javascript %}
+		{% block oh_google_maps_callback %}
+			<script type="text/javascript">
+				var oh_google_maps_callback = function(location, gmap){
+					// your callback function here
+				}
+			</script>	
+		{% endblock %}
+		<script type="text/javascript">
+
+			$(function(){
+				$('#{{ id }}_map_canvas').ohGoogleMapType({
+				  'search_input_el'    : $('#{{ id }}_input'),
+				  'search_action_el'   : $('#{{ id }}_search_button'),
+				  'search_error_el'    : $('#{{ id }}_error'),
+				  'current_position_el': $('#{{ id }}_current_position'),
+				  'default_lat'        : '{% if value is defined and value.lat %}{{ value.lat }}{% else %}{{ default_lat }}{% endif %}',
+				  'default_lng'        : '{% if value is defined and value.lng %}{{ value.lng }}{% else %}{{ default_lng }}{% endif %}',
+				  'default_zoom'       : {% if value is defined and value.lat and value.lng %}15{% else %}5{% endif %},
+				  'lat_field'          : $('#{{ attribute(form, lat_name).vars.id }}'),
+				  'lng_field'          : $('#{{ attribute(form, lng_name).vars.id }}'),
+				  'callback'           : oh_google_maps_callback
+				});
+			});
+
+		</script>
+	{% endblock %}
+</div>
+{% endblock %}
