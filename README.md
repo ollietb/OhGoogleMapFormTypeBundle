@@ -12,6 +12,14 @@ This bundle is compatible with Symfony 2.1. Add the following to your `composer.
 
 You might need to change a couple of options if you are trying to use Symfony 2.0
 
+Add OhGoogleMapFormTypeBundle to assetic
+```yaml
+# app/config/config.yml
+# Assetic Configuration
+assetic:
+    bundles:        [ 'OhGoogleMapFormTypeBundle' ]
+```
+
 Usage
 ------------
 
