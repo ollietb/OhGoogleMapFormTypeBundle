@@ -10,6 +10,17 @@ This bundle is compatible with Symfony 2.1. Add the following to your `composer.
 
     "oh/google-map-form-type-bundle": "dev-master"
 
+Register the bundle in your `app/AppKernel.php`:
+
+```php
+// app/AppKernel.php
+public function registerBundles()
+    {
+        $bundles = array(
+            new Oh\GoogleMapFormTypeBundle\OhGoogleMapFormTypeBundle(),
+            // ...
+```
+
 You might need to change a couple of options if you are trying to use Symfony 2.0
 
 Add OhGoogleMapFormTypeBundle to assetic
@@ -25,6 +36,8 @@ Usage
 
 This bundle contains a new FormType called GoogleMapType which can be used in your forms like so:
 
+    use Oh\GoogleMapFormTypeBundle\Form\Type\GoogleMapType;
+    [...]
     $builder->add('latlng', new GoogleMapType());
 
 On your model you will have to process the latitude and longitude array
