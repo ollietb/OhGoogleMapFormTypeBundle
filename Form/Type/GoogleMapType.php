@@ -51,16 +51,14 @@ class GoogleMapType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view
-            ->set('lat_name', $options['lat_name'])
-            ->set('lng_name', $options['lng_name'])
-            ->set('map_width', $options['map_width'])
-            ->set('map_height', $options['map_height'])
-            ->set('default_lat', $options['default_lat'])
-            ->set('default_lng', $options['default_lng'])
-            ->set('include_jquery', $options['include_jquery'])
-            ->set('include_gmaps_js', $options['include_gmaps_js'])
-        ;
+            $view->vars['lat_name'] = $options['lat_name']; 
+            $view->vars['lng_name'] = $options['lng_name']; 
+            $view->vars['map_width'] = $options['map_width']; 
+            $view->vars['map_height'] = $options['map_height']; 
+            $view->vars['default_lat'] = $options['default_lat']; 
+            $view->vars['default_lng'] = $options['default_lng']; 
+            $view->vars['include_jquery'] = $options['include_jquery']; 
+            $view->vars['include_gmaps_js'] = $options['include_gmaps_js'];
     }
 
     public function getParent()
