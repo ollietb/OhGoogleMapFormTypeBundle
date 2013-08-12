@@ -12,7 +12,10 @@
 			  'default_zoom'       : 5,
 			  'lat_field'          : null,
 			  'lng_field'          : null,
-			  'callback'           : function (location, gmap) {}
+			  'callback'           : function (location, gmap) {},
+			  'error_callback'     : function(status) {
+			  	$this.settings.search_error_el.text(status);
+			  },
 			}, settings);
 
 		this.settings = settings;
@@ -67,7 +70,7 @@
 					$this.map.setZoom(16);
 					$this.insertMarker(results[0].geometry.location);
 				} else {
-					$this.settings.search_error_el.text(status);
+					$this.settings.error_callback(status);
 				}
 			});
 		},
@@ -85,7 +88,7 @@
 						$this.map.setZoom(16);
 					}, 
 					function(error) {
-						$this.settings.search_error_el.text(error);
+						$this.settings.error_callback(error);
 					}
 				);      
 			} else {
@@ -154,7 +157,10 @@
 			  'default_zoom'       : 5,
 			  'lat_field'          : null,
 			  'lng_field'          : null,
-			  'callback'           : function (location, gmap) {}
+			  'callback'           : function (location, gmap) {},
+			  'error_callback'     : function(status) {
+			  	$this.settings.search_error_el.text(status);
+			  }
 			}
 
 })( jQuery );
