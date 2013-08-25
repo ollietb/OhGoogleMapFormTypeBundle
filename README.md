@@ -36,9 +36,7 @@ Usage
 
 This bundle contains a new FormType called GoogleMapType which can be used in your forms like so:
 
-    use Oh\GoogleMapFormTypeBundle\Form\Type\GoogleMapType;
-    [...]
-    $builder->add('latlng', new GoogleMapType());
+    $builder->add('latlng', 'oh_google_maps');
 
 On your model you will have to process the latitude and longitude array
 
