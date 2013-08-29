@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="form.type.oh_google_maps.class">Oh\GoogleMapFormTypeBundle\Form\Type\GoogleMapType</parameter>
+    </parameters>
+
+    <services>
+        <!-- oh_google_maps form type -->
+        <service id="form.type.oh_google_maps" class="%form.type.oh_google_maps.class%">
+            <tag name="form.type" alias="oh_google_maps" />
+        </service>
+    </services>
+</container>
