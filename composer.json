@@ -5,7 +5,6 @@
     "keywords": ["google maps", "symfony", "form"],
     "homepage": "https://github.com/ollieLtd/OhGoogleMapFormTypeBundle",
     "license": "MIT",
-	"version": "1.0.0",
     "authors": [
         {
             "name": "Ollie Harridge",
@@ -14,12 +13,12 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": ">=2.1,<2.5-dev"
+        "symfony/framework-bundle": "~2.1"
     },
     "autoload": {
         "psr-0": { 
-			"Oh\\GoogleMapFormTypeBundle": ""
-		}
+            "Oh\\GoogleMapFormTypeBundle": ""
+        }
     },
     "target-dir": "Oh/GoogleMapFormTypeBundle"
 }
