@@ -121,7 +121,9 @@ Screenshots
 Known problems
 -------
 
-Because the form type template includes javascript, there's not yet a way to bunch it all together at the very bottom of the page, so it is included at the bottom of the field. This means that jquery and the javascript plugin in Resources/public/js needs to be included before the field. I'm not sure of a way around this, but I think it's going to be addressed in a later version of the form framework.
+Because the form type template includes javascript, there's not yet a standard way to bunch it all together at the very bottom of the page, so it is included at the bottom of the field. This means that jquery and the javascript plugin in Resources/public/js needs to be included before the field.
+
+Alternatively, you can install [LcnIncludeAssetsBundle](https://github.com/FaiblUG/LcnIncludeAssetsBundle) and then all the required scripts should get loaded in the right place and order. 
 
 Credits
 -------
