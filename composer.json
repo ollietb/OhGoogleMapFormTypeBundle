@@ -7,8 +7,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Ollie Harridge",
-            "email": "code@oll.ie"
+            "name": "grek",
+            "email": "grek@g.pl"
         }
     ],
     "require": {
@@ -17,8 +17,8 @@
     },
     "autoload": {
         "psr-0": { 
-            "Mea\\GoogleMapFormTypeBundle": ""
+            "Oh\\GoogleMapFormTypeBundle": ""
         }
     },
-    "target-dir": "Mea/GoogleMapFormTypeBundle"
+    "target-dir": "Oh/GoogleMapFormTypeBundle"
 }
