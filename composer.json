@@ -1,9 +1,9 @@
 {
-    "name": "oh/google-map-form-type-bundle",
+    "name": "grekpg/google-map-form-type-bundle",
     "type": "symfony-bundle",
     "description": "Set latitude and longitude values on a form using Google Maps",
     "keywords": ["google maps", "symfony", "form"],
-    "homepage": "https://github.com/ollieLtd/OhGoogleMapFormTypeBundle",
+    "homepage": "https://github.com/grekpg/OhGoogleMapFormTypeBundle",
     "license": "MIT",
     "authors": [
         {
@@ -20,5 +20,5 @@
             "Oh\\GoogleMapFormTypeBundle": ""
         }
     },
-    "target-dir": "Oh/GoogleMapFormTypeBundle"
+    "target-dir": "Mea/GoogleMapFormTypeBundle"
 }
