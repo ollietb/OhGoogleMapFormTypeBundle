@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-0": { 
-            "Oh\\GoogleMapFormTypeBundle": ""
+            "Mea\\GoogleMapFormTypeBundle": ""
         }
     },
     "target-dir": "Mea/GoogleMapFormTypeBundle"
