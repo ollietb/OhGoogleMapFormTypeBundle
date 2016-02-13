@@ -1,5 +1,5 @@
 {
-    "name": "grekpg/google-map-form-type-bundle",
+    "name": "grekpg/ohgooglemapformtypebundle",
     "type": "symfony-bundle",
     "description": "Set latitude and longitude values on a form using Google Maps",
     "keywords": ["google maps", "symfony", "form"],
