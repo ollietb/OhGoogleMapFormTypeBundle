@@ -8,7 +8,7 @@ Installation
 
 This bundle is compatible with Symfony 2.1. Add the following to your `composer.json`:
 
-    "oh/google-map-form-type-bundle": "dev-master"
+    "grekpg/OhGoogleMapFormTypeBundle": "dev-master"
 
 Register the bundle in your `app/AppKernel.php`:
 
