@@ -37,6 +37,7 @@ class GoogleMapType extends AbstractType
             'lat_name'       => 'lat',   // the name of the lat field
             'lng_name'       => 'lng',   // the name of the lng field
             'error_bubbling' => false,
+            'zoom_callback' => false,    //form callback
             'map_width'      => 300,     // the width of the map
             'map_height'     => 300,     // the height of the map
             'default_lat'    => 51.5,    // the starting position on the map
@@ -59,6 +60,7 @@ class GoogleMapType extends AbstractType
             $view->vars['default_lng'] = $options['default_lng']; 
             $view->vars['include_jquery'] = $options['include_jquery']; 
             $view->vars['include_gmaps_js'] = $options['include_gmaps_js'];
+            $view->vars['zoom_callback'] = $options['zoom_callback'];
     }
 
     public function getParent()

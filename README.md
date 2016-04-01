@@ -8,7 +8,7 @@ Installation
 
 This bundle is compatible with Symfony 2.1. Add the following to your `composer.json`:
 
-    "oh/google-map-form-type-bundle": "dev-master"
+    "grekpg/OhGoogleMapFormTypeBundle": "dev-master"
 
 Register the bundle in your `app/AppKernel.php`:
 
@@ -36,7 +36,9 @@ Usage
 
 This bundle contains a new FormType called GoogleMapType which can be used in your forms like so:
 
-    $builder->add('latlng', 'oh_google_maps');
+    $builder->add('latlng', 'oh_google_maps',array(
+        'zoom_callback'=>'function(zoom){ $("#zoom").val(zoom); }' //optional zoom change listener
+    ));
 
 On your model you will have to process the latitude and longitude array
 

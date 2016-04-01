@@ -13,6 +13,7 @@
 			  'lat_field'          : null,
 			  'lng_field'          : null,
 			  'callback'           : function (location, gmap) {},
+              'zoom_callback'           : function (zoom) {},
 			  'error_callback'     : function(status) {
 			  	$this.settings.search_error_el.text(status);
 			  },
@@ -50,6 +51,10 @@
 				$this.updateLocation(point);
 
 			});
+
+            google.maps.event.addListener(this.map, 'zoom_changed', function() {
+                $this.settings.zoom_callback($this.map.getZoom());
+            });
 
 			google.maps.event.addListener(this.map, 'click', function(event) {
 				$this.insertMarker(event.latLng);
@@ -158,6 +163,7 @@
 			  'lat_field'          : null,
 			  'lng_field'          : null,
 			  'callback'           : function (location, gmap) {},
+			  'zoom_callback'      : function (zoom) {},
 			  'error_callback'     : function(status) {
 			  	$this.settings.search_error_el.text(status);
 			  }
