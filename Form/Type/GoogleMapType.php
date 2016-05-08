@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 class GoogleMapType extends AbstractType
 {
@@ -63,10 +64,10 @@ class GoogleMapType extends AbstractType
 
     public function getParent()
     {
-        return 'form';
+        return FormType::class;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'oh_google_maps';
     }
