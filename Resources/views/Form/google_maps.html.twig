@@ -3,7 +3,7 @@
 	{% block oh_google_maps_html %} 
 	<div id="{{ id }}_container">
 		<input type="text" id="{{ id }}_input" /><button id="{{ id }}_search_button" class="btn">Search</button><br /><a href="#" id="{{ id }}_current_position">Current location</a>
-		<div id="{{ id }}_map_canvas" class="gmap" style="width: {{ map_width }}px; height: {{ map_height }}px"></div>
+		<div id="{{ id }}_map_canvas" class="gmap" style="width: {{ map_width }}; height: {{ map_height }}"></div>
 		<div id="{{ id }}_error"></div>
 	</div>
 	{% endblock %}

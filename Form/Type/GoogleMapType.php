@@ -37,8 +37,8 @@ class GoogleMapType extends AbstractType
             'lat_name'       => 'lat',   // the name of the lat field
             'lng_name'       => 'lng',   // the name of the lng field
             'error_bubbling' => false,
-            'map_width'      => 300,     // the width of the map
-            'map_height'     => 300,     // the height of the map
+            'map_width'      => '100%',     // the width of the map
+            'map_height'     => '400px',     // the height of the map
             'default_lat'    => 51.5,    // the starting position on the map
             'default_lng'    => -0.1245, // the starting position on the map
             'include_jquery' => false,   // jquery needs to be included above the field (ie not at the bottom of the page)
