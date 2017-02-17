@@ -8,7 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 class GoogleMapType extends AbstractType
 {
@@ -27,7 +29,7 @@ class GoogleMapType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'type'           => 'text',  // the types to render the lat and lng fields as
@@ -37,8 +39,8 @@ class GoogleMapType extends AbstractType
             'lat_name'       => 'lat',   // the name of the lat field
             'lng_name'       => 'lng',   // the name of the lng field
             'error_bubbling' => false,
-            'map_width'      => 300,     // the width of the map
-            'map_height'     => 300,     // the height of the map
+            'map_width'      => '100%',     // the width of the map
+            'map_height'     => '400px',     // the height of the map
             'default_lat'    => 51.5,    // the starting position on the map
             'default_lng'    => -0.1245, // the starting position on the map
             'include_jquery' => false,   // jquery needs to be included above the field (ie not at the bottom of the page)
@@ -63,10 +65,10 @@ class GoogleMapType extends AbstractType
 
     public function getParent()
     {
-        return 'form';
+        return FormType::class;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'oh_google_maps';
     }

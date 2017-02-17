@@ -11,7 +11,7 @@
     <services>
         <!-- oh_google_maps form type -->
         <service id="form.type.oh_google_maps" class="%form.type.oh_google_maps.class%">
-            <tag name="form.type" alias="oh_google_maps" />
+            <tag name="form.type" />
         </service>
     </services>
 </container>
