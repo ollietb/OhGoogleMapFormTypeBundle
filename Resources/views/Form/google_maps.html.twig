@@ -1,13 +1,13 @@
 {% block oh_google_maps_widget %}
 <div {{ block('widget_container_attributes') }}>
-	{% block oh_google_maps_html %} 
+	{% block oh_google_maps_html %}
 	<div id="{{ id }}_container">
 		<input type="text" id="{{ id }}_input" /><button id="{{ id }}_search_button" class="btn">Search</button><br /><a href="#" id="{{ id }}_current_position">Current location</a>
 		<div id="{{ id }}_map_canvas" class="gmap" style="width: {{ map_width }}; height: {{ map_height }}"></div>
 		<div id="{{ id }}_error"></div>
 	</div>
 	{% endblock %}
-	{% block oh_google_maps_fields %} 
+	{% block oh_google_maps_fields %}
 		{% for child in form %}
 		    {{ form_row(child) }}
         {% endfor %}
@@ -31,7 +31,7 @@
 				var oh_google_maps_callback = function(location, gmap){
 					// your callback function here
 				}
-			</script>	
+			</script>
 		{% endblock %}
 		<script type="text/javascript">
 
@@ -46,6 +46,8 @@
 				  'default_zoom'       : {% if value is defined and value and value.lat and value.lng %}15{% else %}5{% endif %},
 				  'lat_field'          : $('#{{ attribute(form, lat_name).vars.id }}'),
 				  'lng_field'          : $('#{{ attribute(form, lng_name).vars.id }}'),
+				  'addr_field'         : {% if addr_name is defined and addr_name and attribute(form, addr_name) %}
+				    $('#{{ attribute(form, addr_name).vars.id }}'){% else %} null {% endif %},
 				  'callback'           : oh_google_maps_callback
 				});
 			});

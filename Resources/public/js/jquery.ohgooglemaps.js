@@ -12,6 +12,7 @@
 			  'default_zoom'       : 5,
 			  'lat_field'          : null,
 			  'lng_field'          : null,
+			  'addr_field'         : null,
 			  'callback'           : function (location, gmap) {},
 			  'error_callback'     : function(status) {
 			  	$this.settings.search_error_el.text(status);
@@ -36,9 +37,9 @@
 				center: center,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
-			
+
 			var $this = this;
-			
+
 			this.map =  new google.maps.Map(this.map_el[0], mapOptions);
 
 			this.addMarker(center);
@@ -56,7 +57,7 @@
 			});
 
 			this.settings.search_action_el.click($.proxy(this.searchAddress, $this));
-			
+
 			this.settings.current_position_el.click($.proxy(this.currentPosition, $this));
 		},
 
@@ -69,32 +70,48 @@
 					$this.map.setCenter(results[0].geometry.location);
 					$this.map.setZoom(16);
 					$this.insertMarker(results[0].geometry.location);
+					$this.setAddress(results[0].formatted_address)
 				} else {
 					$this.settings.error_callback(status);
 				}
 			});
 		},
 
+		updateAddress: function (location){
+			var $this = this;
+			this.geocoder.geocode( { 'location': location}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					$this.setAddress(results[0].formatted_address);
+				} else {
+					$this.settings.error_callback(status);
+				}
+			});
+		},
+
+		setAddress : function (address) {
+			this.settings.addr_field && this.settings.addr_field.val(address);
+		},
+
 		currentPosition : function(e){
 			e.preventDefault();
 			var $this = this;
-			
+
 			if ( navigator.geolocation ) {
-				navigator.geolocation.getCurrentPosition ( 
+				navigator.geolocation.getCurrentPosition (
 					function(position) {
 						var clientPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 						$this.insertMarker(clientPosition);
 						$this.map.setCenter(clientPosition);
 						$this.map.setZoom(16);
-					}, 
+					},
 					function(error) {
 						$this.settings.error_callback(error);
 					}
-				);      
+				);
 			} else {
 				$this.settings.search_error_el.text('Your broswer does not support geolocation');
 			}
-			
+
 		},
 
 		updateLocation : function (location){
@@ -123,6 +140,7 @@
 
 			this.updateLocation(position);
 
+			this.updateAddress(position);
 		},
 		removeMarker : function () {
 			if(this.marker != undefined){
@@ -146,7 +164,7 @@
 		});
 
 	};
-	
+
 	$.fn.ohGoogleMapType.defaultSettings = {
 			  'search_input_el'    : null,
 			  'search_action_el'   : null,
@@ -157,6 +175,7 @@
 			  'default_zoom'       : 5,
 			  'lat_field'          : null,
 			  'lng_field'          : null,
+			  'addr_field'         : null,
 			  'callback'           : function (location, gmap) {},
 			  'error_callback'     : function(status) {
 			  	$this.settings.search_error_el.text(status);

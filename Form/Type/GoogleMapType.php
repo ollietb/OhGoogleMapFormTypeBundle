@@ -22,8 +22,11 @@ class GoogleMapType extends AbstractType
     {
         $builder
             ->add($options['lat_name'], $options['type'], array_merge($options['options'], $options['lat_options']))
-            ->add($options['lng_name'], $options['type'], array_merge($options['options'], $options['lng_options']))
-        ;
+            ->add($options['lng_name'], $options['type'], array_merge($options['options'], $options['lng_options']));
+        if(isset($options['addr_name']) && $options['addr_name']) {
+            $builder
+                ->add($options['addr_name'], $options['type'], array_merge($options['options'], $options['addr_options']));
+        }
     }
 
     /**
@@ -34,13 +37,15 @@ class GoogleMapType extends AbstractType
         $resolver->setDefaults(array(
             'type'           => 'text',  // the types to render the lat and lng fields as
             'options'        => array(), // the options for both the fields
-            'lat_options'  => array(),   // the options for just the lat field
-            'lng_options' => array(),    // the options for just the lng field
+            'lat_options'    => array(), // the options for just the lat field
+            'lng_options'    => array(), // the options for just the lng field
+            'addr_options'   => array(), // the options for just the addr field
             'lat_name'       => 'lat',   // the name of the lat field
             'lng_name'       => 'lng',   // the name of the lng field
+            'addr_name'      => null,    // the name of the addr field
             'error_bubbling' => false,
-            'map_width'      => '100%',     // the width of the map
-            'map_height'     => '400px',     // the height of the map
+            'map_width'      => '100%',  // the width of the map
+            'map_height'     => '400px', // the height of the map
             'default_lat'    => 51.5,    // the starting position on the map
             'default_lng'    => -0.1245, // the starting position on the map
             'include_jquery' => false,   // jquery needs to be included above the field (ie not at the bottom of the page)
@@ -53,13 +58,14 @@ class GoogleMapType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-            $view->vars['lat_name'] = $options['lat_name']; 
-            $view->vars['lng_name'] = $options['lng_name']; 
-            $view->vars['map_width'] = $options['map_width']; 
-            $view->vars['map_height'] = $options['map_height']; 
-            $view->vars['default_lat'] = $options['default_lat']; 
-            $view->vars['default_lng'] = $options['default_lng']; 
-            $view->vars['include_jquery'] = $options['include_jquery']; 
+            $view->vars['lat_name'] = $options['lat_name'];
+            $view->vars['lng_name'] = $options['lng_name'];
+            $view->vars['addr_name'] = $options['addr_name'] ?? null;
+            $view->vars['map_width'] = $options['map_width'];
+            $view->vars['map_height'] = $options['map_height'];
+            $view->vars['default_lat'] = $options['default_lat'];
+            $view->vars['default_lng'] = $options['default_lng'];
+            $view->vars['include_jquery'] = $options['include_jquery'];
             $view->vars['include_gmaps_js'] = $options['include_gmaps_js'];
     }
 
