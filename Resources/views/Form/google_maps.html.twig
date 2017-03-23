@@ -2,7 +2,11 @@
 <div {{ block('widget_container_attributes') }}>
 	{% block oh_google_maps_html %}
 	<div id="{{ id }}_container">
-		<input type="text" id="{{ id }}_input" /><button id="{{ id }}_search_button" class="btn">Search</button><br /><a href="#" id="{{ id }}_current_position">Current location</a>
+		<input type="text" id="{{ id }}_input" />
+		<button id="{{ id }}_search_button" class="btn">{{ "Search"|trans }}</button>
+		<p>
+			<a href="#" id="{{ id }}_current_position">{{ "Goto current location"|trans }}</a>
+		</p>
 		<div id="{{ id }}_map_canvas" class="gmap" style="width: {{ map_width }}; height: {{ map_height }}"></div>
 		<div id="{{ id }}_error"></div>
 	</div>
@@ -36,6 +40,8 @@
 		<script type="text/javascript">
 
 			$(function(){
+
+				// Set ohGoogleMapType
 				$('#{{ id }}_map_canvas').ohGoogleMapType({
 				  'search_input_el'    : $('#{{ id }}_input'),
 				  'search_action_el'   : $('#{{ id }}_search_button'),
@@ -46,10 +52,27 @@
 				  'default_zoom'       : {% if value is defined and value and value.lat and value.lng %}15{% else %}5{% endif %},
 				  'lat_field'          : $('#{{ attribute(form, lat_name).vars.id }}'),
 				  'lng_field'          : $('#{{ attribute(form, lng_name).vars.id }}'),
-				  'addr_field'         : {% if addr_name is defined and addr_name and attribute(form, addr_name) %}
-				    $('#{{ attribute(form, addr_name).vars.id }}'){% else %} null {% endif %},
+				{% if addr_name is defined and addr_name and attribute(form, addr_name) %}
+				  'addr_field'         : $('#{{ attribute(form, addr_name).vars.id }}'),
+				{% else %}
+				  'addr_field'         :  {},
+				{% endif %}
+				{% if addr_use_btn is defined and addr_use_btn and attribute(form, addr_use_btn.name) %}
+				  'addr_use_btn'       : $('#{{ attribute(form, addr_use_btn.name).vars.id }}'),
+				{% else %}
+                  'addr_use_btn'       : {},
+				{% endif %}
 				  'callback'           : oh_google_maps_callback
 				});
+
+				// Set use_btn behaviour
+				{% if addr_use_btn is defined and addr_use_btn and attribute(form, addr_use_btn.name) %}
+					$('#{{ attribute(form, addr_use_btn.name).vars.id }}').on('click', function(){
+                      $('#{{ form.parent.offsetGet( addr_use_btn.target ).vars.id }}').val(
+                        $('#{{ attribute(form, addr_name).vars.id }}').val()
+                      );
+					});
+				{% endif %}
 			});
 
 		</script>
