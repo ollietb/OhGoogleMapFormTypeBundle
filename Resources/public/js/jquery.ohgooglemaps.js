@@ -49,7 +49,7 @@
 				var point = $this.marker.getPosition();
 				$this.map.panTo(point);
 				$this.updateLocation(point);
-
+				$this.updateAddress(point);
 			});
 
 			google.maps.event.addListener(this.map, 'click', function(event) {
