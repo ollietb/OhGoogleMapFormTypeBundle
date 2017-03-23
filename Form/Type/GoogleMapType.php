@@ -74,6 +74,11 @@ class GoogleMapType extends AbstractType
         return FormType::class;
     }
 
+    public function getName()
+	{
+		return 'oh_google_maps';
+	}
+
     public function getBlockPrefix()
     {
         return 'oh_google_maps';
