@@ -53,7 +53,8 @@ class GoogleMapType extends AbstractType
     {
         $resolver->setDefaults([
             'api_key'          => $this->api_key,
-            'type'             => TextType::class, // the types to render the lat and lng fields as
+            'type'             => TextType::class, // the types to render the lat and lng fields
+            'search_enabled'   => true,
             'options'          => [], // the options for both the fields
             'lat_options'      => [], // the options for just the lat field
             'lng_options'      => [], // the options for just the lng field
@@ -78,6 +79,7 @@ class GoogleMapType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['api_key']          = $options['api_key'];
+        $view->vars['search_enabled']   = $options['search_enabled'];
         $view->vars['lat_name']         = $options['lat_name'];
         $view->vars['lng_name']         = $options['lng_name'];
         $view->vars['addr_name']        = $options['addr_name'] ?: null;

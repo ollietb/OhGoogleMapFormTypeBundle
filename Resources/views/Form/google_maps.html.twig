@@ -2,8 +2,10 @@
 <div {{ block('widget_container_attributes') }}>
 	{% block oh_google_maps_html %}
 	<div id="{{ id }}_container">
+		{% if search_enabled %}
 		<input type="text" id="{{ id }}_input" />
 		<button id="{{ id }}_search_button" class="btn">{{ "Search"|trans }}</button>
+		{% endif %}
 		<p>
 			<a href="#" id="{{ id }}_current_position">{{ "Goto current location"|trans }}</a>
 		</p>
