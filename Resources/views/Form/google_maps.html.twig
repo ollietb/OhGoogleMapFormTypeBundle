@@ -2,8 +2,10 @@
 <div {{ block('widget_container_attributes') }}>
 	{% block oh_google_maps_html %}
 	<div id="{{ id }}_container">
+		{% if search_enabled %}
 		<input type="text" id="{{ id }}_input" />
 		<button id="{{ id }}_search_button" class="btn">{{ "Search"|trans }}</button>
+		{% endif %}
 		<p>
 			<a href="#" id="{{ id }}_current_position">{{ "Goto current location"|trans }}</a>
 		</p>
@@ -21,7 +23,7 @@
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 		{% endif %}
 		{% if include_gmaps_js %}
-		<script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
+		<script type="text/javascript" src="//maps.google.com/maps/api/js?key={{ api_key }}"></script>
 		{% endif %}
 		{% javascripts
 			'@OhGoogleMapFormTypeBundle/Resources/public/js/jquery.ohgooglemaps.js'
