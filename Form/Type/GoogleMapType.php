@@ -4,7 +4,6 @@ namespace Oh\GoogleMapFormTypeBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -13,10 +12,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GoogleMapType extends AbstractType
 {
-
     private $api_key;
 
-    public function __construct($api_key){
+    public function __construct($api_key)
+    {
         $this->api_key = $api_key;
     }
 
@@ -90,16 +89,6 @@ class GoogleMapType extends AbstractType
         $view->vars['default_lng']      = $options['default_lng'];
         $view->vars['include_jquery']   = $options['include_jquery'];
         $view->vars['include_gmaps_js'] = $options['include_gmaps_js'];
-    }
-
-    public function getParent()
-    {
-        return FormType::class;
-    }
-
-    public function getName()
-    {
-        return 'oh_google_maps';
     }
 
     public function getBlockPrefix()

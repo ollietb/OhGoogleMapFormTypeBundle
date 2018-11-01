@@ -21,17 +21,12 @@ public function registerBundles()
             // ...
 ```
 
-You might need to change a couple of options if you are trying to use Symfony 2.0
 
-Add OhGoogleMapFormTypeBundle to assetic
-```yaml
-# app/config/config.yml
-# Assetic Configuration
-assetic:
-    bundles:        [ 'OhGoogleMapFormTypeBundle' ]
-    
-...
+Add a file  
+`vendor/oh/google-map-form-type-bundle/Oh/GoogleMapFormTypeBundle/Resources/public/js/jquery.ohgooglemaps.js`
+to your webpack encore config.
 
+```
 oh_google_map_form_type:
     api_key: "%google_maps_api_key%"
 ```
@@ -41,10 +36,19 @@ Usage
 
 This bundle contains a new FormType called GoogleMapType which can be used in your forms like so:
 
-    $builder->add('latlng', 'oh_google_maps');
+```php
+<?php
+
+use Oh\GoogleMapFormTypeBundle\Form\Type\GoogleMapType;
+    
+/** @var \Symfony\Component\Form\FormBuilderInterface $builder */
+$builder->add('latlng', GoogleMapType::class);
+```
 
 On your model you will have to process the latitude and longitude array
 
+```php
+<?php
     // Your model eg, src/My/Location/Entity/MyLocation.php
     use Symfony\Component\Validator\Constraints as Assert;
     use Oh\GoogleMapFormTypeBundle\Validator\Constraints as OhAssert;
@@ -70,18 +74,22 @@ On your model you will have to process the latitude and longitude array
         }
 
     }
+```
 
 Include the twig template for the layout. It's generally a good idea to overwrite the form template in your own twig template
 
+```yaml
     # your config.yml
     twig:
         form:
             resources:
                 # This uses the default - you can put your own one here
                 - 'OhGoogleMapFormTypeBundle:Form:fields.html.twig'
+```
 
 If you are intending to override some of the elements in the template then you can do so by extending the default `google_maps.html.twig`. This example adds a callback to the javascript when a new map position is selected.
 
+```twig
     {# your template which is inluded in the config.yml (above) 
        eg src/My/Location/Resources/views/Form/fields.html.twig #}
     {% extends "OhGoogleMapFormTypeBundle:Form:google_maps.html.twig" %}
@@ -93,13 +101,14 @@ If you are intending to override some of the elements in the template then you c
 				}
 			</script>	
     {% endblock %}
-
+```
 
 Options
 -------
 
 There are a number of options, mostly self-explanatory
 
+```
     array(
 		'type'           => 'text',  // the types to render the lat and lng fields as
 		'options'        => array(), // the options for both the fields
@@ -116,6 +125,7 @@ There are a number of options, mostly self-explanatory
 		'include_jquery' => false,   // jquery needs to be included above the field (ie not at the bottom of the page)
 		'include_gmaps_js'=>true     // is this the best place to include the google maps javascript?
 	)
+```
 
 Screenshots
 -------
