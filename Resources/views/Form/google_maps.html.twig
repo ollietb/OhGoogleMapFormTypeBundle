@@ -28,11 +28,6 @@
 		{% if include_gmaps_js %}
 		<script type="text/javascript" src="//maps.google.com/maps/api/js?key={{ api_key }}"></script>
 		{% endif %}
-		{% javascripts
-			'@OhGoogleMapFormTypeBundle/Resources/public/js/jquery.ohgooglemaps.js'
-		%}
-		<script type="text/javascript" src="{{ asset_url }}"></script>
-		{% endjavascripts %}
 	{% endblock %}
 	{% block oh_google_maps_javascript %}
 		{% block oh_google_maps_callback %}
