@@ -3,11 +3,13 @@
 namespace Oh\GoogleMapFormTypeBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class GoogleMapType extends AbstractType
@@ -18,6 +20,9 @@ class GoogleMapType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+       unset($options['options']['compound']);
+
         $builder
             ->add($options['lat_name'], $options['type'], array_merge($options['options'], $options['lat_options']))
             ->add($options['lng_name'], $options['type'], array_merge($options['options'], $options['lng_options']))
@@ -27,11 +32,14 @@ class GoogleMapType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'type'           => 'text',  // the types to render the lat and lng fields as
-            'options'        => array(), // the options for both the fields
+            'type'           => TextType::class,  // the types to render the lat and lng fields as
+            'compound'=>true,
+            'options'        => array(
+                'compound'=>true
+            ), // the options for both the fields
             'lat_options'  => array(),   // the options for just the lat field
             'lng_options' => array(),    // the options for just the lng field
             'lat_name'       => 'lat',   // the name of the lat field
@@ -65,10 +73,10 @@ class GoogleMapType extends AbstractType
 
     public function getParent()
     {
-        return 'form';
+        return TextType::class;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'oh_google_maps';
     }
