@@ -22,6 +22,13 @@ class Configuration implements ConfigurationInterface
         
         $rootNode = $treeBuilder->root('oh_google_map_form_type');
 
+
+        $rootNode
+            ->children()
+            ->scalarNode('api_key')->defaultNull()->end()
+            ->scalarNode('include_gmaps_js')->defaultFalse()->end()
+            ->end();
+
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.

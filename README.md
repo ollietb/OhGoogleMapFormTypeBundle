@@ -36,7 +36,7 @@ Usage
 
 This bundle contains a new FormType called GoogleMapType which can be used in your forms like so:
 
-    $builder->add('latlng', 'oh_google_maps',array(
+    $builder->add('latlng', GoogleMapType::class,array(
         'zoom_callback'=>'function(zoom){ $("#zoom").val(zoom); }' //optional zoom change listener
     ));
 

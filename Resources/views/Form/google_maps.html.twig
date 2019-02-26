@@ -2,7 +2,9 @@
 <div {{ block('widget_container_attributes') }}>
 	{% block oh_google_maps_html %} 
 	<div id="{{ id }}_container">
-		<input type="text" id="{{ id }}_input" /><button id="{{ id }}_search_button" class="btn">Search</button><br /><a href="#" id="{{ id }}_current_position">Current location</a>
+		<input type="text" id="{{ id }}_input" />
+		<button id="{{ id }}_search_button" class="btn">Search</button><br />
+		<a href="#" id="{{ id }}_current_position">Current location</a>
 		<div id="{{ id }}_map_canvas" class="gmap" style="width: {{ map_width }}px; height: {{ map_height }}px"></div>
 		<div id="{{ id }}_error"></div>
 	</div>
@@ -17,13 +19,14 @@
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 		{% endif %}
 		{% if include_gmaps_js %}
-		<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true"></script>
+		<script>alert('override template ad add key $KEY');</script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=$KEY"></script>
 		{% endif %}
-		{% javascripts
-			'@OhGoogleMapFormTypeBundle/Resources/public/js/jquery.ohgooglemaps.js'
-		%}
-		<script type="text/javascript" src="{{ asset_url }}"></script>
-		{% endjavascripts %}
+		{#{% javascripts#}
+			{#'@OhGoogleMapFormTypeBundle/Resources/public/js/jquery.ohgooglemaps.js'#}
+		{#%}#}
+		{#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+		{#{% endjavascripts %}#}
 	{% endblock %}
 	{% block oh_google_maps_javascript %}
 		{% block oh_google_maps_callback %}

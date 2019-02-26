@@ -165,7 +165,8 @@
 			  'callback'           : function (location, gmap) {},
 			  'zoom_callback'      : function (zoom) {},
 			  'error_callback'     : function(status) {
-			  	$this.settings.search_error_el.text(status);
+			  	//todo: what is this ? console.log(status);
+			  	//$this.settings.search_error_el.text(status);
 			  }
 			}
 
