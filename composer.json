@@ -29,9 +29,6 @@
         "oh/google-map-form-type-bundle":"1.*"
     },
     "autoload": {
-        "psr-4": {
-            "Oh\\GoogleMapFormTypeBundle\\": ""
-        }
-    },
-    "target-dir": "krixer/GoogleMapFormTypeBundle"
+        "psr-4": { "Oh\\GoogleMapFormTypeBundle\\": "" }
+    }
 }
