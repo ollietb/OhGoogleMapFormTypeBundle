@@ -29,7 +29,7 @@
         "oh/google-map-form-type-bundle":"1.*"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Oh\\GoogleMapFormTypeBundle\\": ""
         }
     },
