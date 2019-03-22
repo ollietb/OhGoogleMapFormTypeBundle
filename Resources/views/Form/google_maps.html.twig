@@ -1,14 +1,23 @@
 {% block oh_google_maps_widget %}
 <div {{ block('widget_container_attributes') }}>
 	{% block oh_google_maps_html %}
-	<div id="{{ id }}_container">
+	<div id="{{ id }}_container" class="form-group">
 		{% if search_enabled %}
-		<input type="text" id="{{ id }}_input" />
-		<button id="{{ id }}_search_button" class="btn">{{ "Search"|trans }}</button>
+			<span class="input-group">
+				<span class="input-group-btn">
+					<a href="#" id="{{ id }}_current_position" class="btn btn-default">{{ "Goto current location"|trans }}</a>
+				</span>
+				<input type="text" id="{{ id }}_input" class="form-control" placeholder="{{ 'Find address'|trans }}" aria-label="{{ 'Find address'|trans }}" aria-describedby="basic-addon2">
+				<span class="input-group-btn">
+					<button id="{{ id }}_search_button" class="btn btn-primary" type="button">{{ "Search"|trans }}</button>
+				</span>
+			</div>
+		{% else %}
+			<p>
+				<a href="#" id="{{ id }}_current_position" class="btn btn-default">{{ "Goto current location"|trans }}</a>
+			</p>
 		{% endif %}
-		<p>
-			<a href="#" id="{{ id }}_current_position">{{ "Goto current location"|trans }}</a>
-		</p>
+
 		<div id="{{ id }}_map_canvas" class="gmap" style="width: {{ map_width }}; height: {{ map_height }}"></div>
 		<div id="{{ id }}_error"></div>
 	</div>
@@ -25,11 +34,7 @@
 		{% if include_gmaps_js %}
 		<script type="text/javascript" src="//maps.google.com/maps/api/js?key={{ api_key }}"></script>
 		{% endif %}
-		{% javascripts
-			'@OhGoogleMapFormTypeBundle/Resources/public/js/jquery.ohgooglemaps.js'
-		%}
-		<script type="text/javascript" src="{{ asset_url }}"></script>
-		{% endjavascripts %}
+		<script type="text/javascript" src="{{ asset('bundles/ohgooglemapformtype/js/jquery.ohgooglemaps.js') }}"></script>
 	{% endblock %}
 	{% block oh_google_maps_javascript %}
 		{% block oh_google_maps_callback %}
@@ -51,7 +56,7 @@
 				  'current_position_el': $('#{{ id }}_current_position'),
 				  'default_lat'        : '{% if value is defined and value and attribute(value, lat_name) %}{{ attribute(value, lat_name) }}{% else %}{{ default_lat }}{% endif %}',
 				  'default_lng'        : '{% if value is defined and value and attribute(value, lng_name) %}{{ attribute(value, lng_name) }}{% else %}{{ default_lng }}{% endif %}',
-				  'default_zoom'       : {% if value is defined and value and value.lat and value.lng %}15{% else %}5{% endif %},
+				  'default_zoom'       : {% if value is defined and value and value.latitude and value.longitude %}15{% else %}5{% endif %},
 				  'lat_field'          : $('#{{ attribute(form, lat_name).vars.id }}'),
 				  'lng_field'          : $('#{{ attribute(form, lng_name).vars.id }}'),
 				{% if addr_name is defined and addr_name and attribute(form, addr_name) %}
