@@ -10,20 +10,18 @@ This bundle is compatible with Symfony 3 and 4. Use composer to install:
 
     composer require krixer/google-map-form-type-bundle
 
-Register the bundle in your `app/AppKernel.php`:
+Register the bundle in your `config/bundles.php`:
 
 ```php
-// app/AppKernel.php
-public function registerBundles()
-    {
-        $bundles = array(
-            new Oh\GoogleMapFormTypeBundle\OhGoogleMapFormTypeBundle(),
-            // ...
+// config/bundles.php
+return [
+    // ...
+    Oh\GoogleMapFormTypeBundle\OhGoogleMapFormTypeBundle::class => ['all' => true],
+];
 ```
 
-You might need to change a couple of options if you are trying to use Symfony 2.0
 
-Add OhGoogleMapFormTypeBundle to assetic
+Create options file in `config/packages` directory
 ```yaml
 # config/packages/oh_google_map_form_type.yaml
 oh_google_map_form_type:
