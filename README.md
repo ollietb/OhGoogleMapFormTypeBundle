@@ -6,9 +6,9 @@ Set latitude and longitude values on a form using Google Maps. The map includes 
 Installation
 ------------
 
-This bundle is compatible with Symfony 2.1. Add the following to your `composer.json`:
+This bundle is compatible with Symfony 3 and 4. Use composer to install:
 
-    "oh/google-map-form-type-bundle": "dev-master"
+    composer require krixer/google-map-form-type-bundle
 
 Register the bundle in your `app/AppKernel.php`:
 
@@ -25,13 +25,7 @@ You might need to change a couple of options if you are trying to use Symfony 2.
 
 Add OhGoogleMapFormTypeBundle to assetic
 ```yaml
-# app/config/config.yml
-# Assetic Configuration
-assetic:
-    bundles:        [ 'OhGoogleMapFormTypeBundle' ]
-    
-...
-
+# config/packages/oh_google_map_form_type.yaml
 oh_google_map_form_type:
     api_key: "%google_maps_api_key%"
 ```
@@ -41,33 +35,18 @@ Usage
 
 This bundle contains a new FormType called GoogleMapType which can be used in your forms like so:
 
-    $builder->add('latlng', 'oh_google_maps');
+    $builder->add('latlng', GoogleMapType::class);
 
 On your model you will have to process the latitude and longitude array
 
     // Your model eg, src/My/Location/Entity/MyLocation.php
-    use Symfony\Component\Validator\Constraints as Assert;
-    use Oh\GoogleMapFormTypeBundle\Validator\Constraints as OhAssert;
+    use Oh\GoogleMapFormTypeBundle\Traits\LocationTrait;
+
 
     class MyLocation
     {
-        // ... include your lat and lng fields here
-
-        public function setLatLng($latlng)
-        {
-            $this->setLat($latlng['lat']);
-            $this->setLng($latlng['lng']);
-            return $this;
-        }
-
-        /**
-         * @Assert\NotBlank()
-         * @OhAssert\LatLng()
-         */
-        public function getLatLng()
-        {
-            return array('lat'=>$this->getLat(),'lng'=>$this->getLng());
-        }
+        // ... include your lat and lng fields here using LocationTrait
+        use LocationTrait;
 
     }
 
@@ -75,10 +54,9 @@ Include the twig template for the layout. It's generally a good idea to overwrit
 
     # your config.yml
     twig:
-        form:
-            resources:
-                # This uses the default - you can put your own one here
-                - 'OhGoogleMapFormTypeBundle:Form:fields.html.twig'
+        form_themes:
+            # This uses the default - you can put your own one here
+            - 'OhGoogleMapFormTypeBundle:Form:fields.html.twig'
 
 If you are intending to override some of the elements in the template then you can do so by extending the default `google_maps.html.twig`. This example adds a callback to the javascript when a new map position is selected.
 
@@ -101,18 +79,22 @@ Options
 There are a number of options, mostly self-explanatory
 
     array(
-		'type'           => 'text',  // the types to render the lat and lng fields as
-		'options'        => array(), // the options for both the fields
-		'lat_options'    => array(), // the options for just the lat field
-		'lng_options'    => array(), // the options for just the lng field
-		'addr_options'   => array(), // the options for just the addr field
-		'lat_name'       => 'lat',   // the name of the lat field
-		'lng_name'       => 'lng',   // the name of the lng field
-		'addr_name'      => 'addr',  // the name of the addr field (optional)
+		'type'           => HiddenType::class,  // the types to render the lat and lng fields as
+		'addr_type'      => TextType::class,  // the type to render the address field
+		'attr'           => ['class' => 'form-group'],
+		'search_enabled' => true,
+		'options'        => [], // the options for both the fields
+		'lat_options'    => [], // the options for just the lat field
+		'lng_options'    => [], // the options for just the lng field
+		'addr_options'   => [], // the options for just the addr field
+		'lat_name'       => 'latitude',   // the name of the lat field
+		'lng_name'       => 'longitude',   // the name of the lng field
+		'addr_name'      => 'address',  // the name of the addr field (optional)
+ 		'error_bubbling' => false,		
 		'map_width'      => '100%',  // the width of the map
 		'map_height'     => '300px', // the height of the map
-		'default_lat'    => 51.5,    // the starting position on the map
-		'default_lng'    => -0.1245, // the starting position on the map
+		'default_lat'    => 41.390205,    // the starting position on the map
+		'default_lng'    => 2.154007, // the starting position on the map
 		'include_jquery' => false,   // jquery needs to be included above the field (ie not at the bottom of the page)
 		'include_gmaps_js'=>true     // is this the best place to include the google maps javascript?
 	)
@@ -134,3 +116,4 @@ Credits
 -------
 
 * Ollie Harridge (ollietb) as main author.
+* Hector Escriche (krixer) as contributor.
