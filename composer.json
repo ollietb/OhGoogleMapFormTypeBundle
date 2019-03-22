@@ -1,9 +1,9 @@
 {
-    "name": "oh/google-map-form-type-bundle",
+    "name": "krixer/google-map-form-type-bundle",
     "type": "symfony-bundle",
     "description": "Set latitude, longitude and address values on a form using Google Maps",
     "keywords": ["google maps", "symfony", "form"],
-    "homepage": "https://github.com/ollieLtd/OhGoogleMapFormTypeBundle",
+    "homepage": "https://github.com/krixer/OhGoogleMapFormTypeBundle",
     "license": "MIT",
     "authors": [
         {
@@ -13,16 +13,25 @@
         {
             "name": "Webber",
             "email": "webber.nl@gmail.com"
+        },
+        {
+            "name": "Hector Escriche",
+            "email": "krixer@gmail.com"
         }
     ],
     "require": {
-        "php": ">=5.3.2",
-        "symfony/framework-bundle": "^2.1 || ^3.0"
+        "php": "^5.4 || ^7.0",
+        "symfony/event-dispatcher": "~3.4|~4.0",
+        "symfony/form": "~3.4|~4.0",
+        "symfony/asset": "~3.4|~4.0"
+    },
+    "replace": {
+        "oh/google-map-form-type-bundle":"1.*"
     },
     "autoload": {
         "psr-0": {
             "Oh\\GoogleMapFormTypeBundle": ""
         }
     },
-    "target-dir": "Oh/GoogleMapFormTypeBundle"
+    "target-dir": "krixer/GoogleMapFormTypeBundle"
 }
