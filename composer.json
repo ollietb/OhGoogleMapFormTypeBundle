@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Oh\\GoogleMapFormTypeBundle": ""
+            "Oh\\GoogleMapFormTypeBundle\\": ""
         }
     },
     "target-dir": "krixer/GoogleMapFormTypeBundle"
