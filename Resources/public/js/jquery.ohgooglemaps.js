@@ -3,21 +3,21 @@
 	function GoogleMapType(settings, map_el) {
 
 		var settings = $.extend( {
-			  'search_input_el'    : null,
-			  'search_action_el'   : null,
-			  'search_error_el'    : null,
-			  'current_position_el': null,
-			  'default_lat'        : '1',
-			  'default_lng'        : '-1',
-			  'default_zoom'       : 5,
-			  'lat_field'          : null,
-			  'lng_field'          : null,
-			  'addr_field'         : null,
-			  'callback'           : function (location, gmap) {},
-			  'error_callback'     : function(status) {
-			  	$this.settings.search_error_el.text(status);
-			  },
-			}, settings);
+			'search_input_el'    : null,
+			'search_action_el'   : null,
+			'search_error_el'    : null,
+			'current_position_el': null,
+			'default_lat'        : '1',
+			'default_lng'        : '-1',
+			'default_zoom'       : 5,
+			'lat_field'          : null,
+			'lng_field'          : null,
+			'addr_field'         : null,
+			'callback'           : function (location, gmap) {},
+			'error_callback'     : function(status) {
+				$this.settings.search_error_el.text(status);
+			},
+		}, settings);
 
 		this.settings = settings;
 
@@ -166,20 +166,20 @@
 	};
 
 	$.fn.ohGoogleMapType.defaultSettings = {
-			  'search_input_el'    : null,
-			  'search_action_el'   : null,
-			  'search_error_el'    : null,
-			  'current_position_el': null,
-			  'default_lat'        : '1',
-			  'default_lng'        : '-1',
-			  'default_zoom'       : 5,
-			  'lat_field'          : null,
-			  'lng_field'          : null,
-			  'addr_field'         : null,
-			  'callback'           : function (location, gmap) {},
-			  'error_callback'     : function(status) {
-			  	$this.settings.search_error_el.text(status);
-			  }
-			}
+		'search_input_el'    : null,
+		'search_action_el'   : null,
+		'search_error_el'    : null,
+		'current_position_el': null,
+		'default_lat'        : '1',
+		'default_lng'        : '-1',
+		'default_zoom'       : 5,
+		'lat_field'          : null,
+		'lng_field'          : null,
+		'addr_field'         : null,
+		'callback'           : function (location, gmap) {},
+		'error_callback'     : function(status) {
+			$this.settings.search_error_el.text(status);
+		}
+	}
 
 })( jQuery );
