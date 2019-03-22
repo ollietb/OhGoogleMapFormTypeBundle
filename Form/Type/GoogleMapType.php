@@ -5,6 +5,7 @@ namespace Oh\GoogleMapFormTypeBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -32,7 +33,7 @@ class GoogleMapType extends AbstractType
 
         // Optional Address field
         if (isset($options['addr_name']) && $options['addr_name']) {
-            $builder->add($options['addr_name'], $options['type'], array_merge($options['options'], $options['addr_options']));
+            $builder->add($options['addr_name'], $options['addr_type'], array_merge($options['options'], $options['addr_options']));
         }
 
         // Optional Address field use button
@@ -53,21 +54,23 @@ class GoogleMapType extends AbstractType
     {
         $resolver->setDefaults([
             'api_key'          => $this->api_key,
-            'type'             => TextType::class, // the types to render the lat and lng fields
+            'type'             => HiddenType::class, // the types to render the lat and lng fields
+            'addr_type'        => TextType::class, // the type to render the address field
+            'attr'             => ['class' => 'form-group'],
             'search_enabled'   => true,
             'options'          => [], // the options for both the fields
             'lat_options'      => [], // the options for just the lat field
             'lng_options'      => [], // the options for just the lng field
             'addr_options'     => [], // the options for just the address field
             'addr_use_btn'     => [], // the options for the address use button
-            'lat_name'         => 'lat', // the name of the lat field
-            'lng_name'         => 'lng', // the name of the lng field
-            'addr_name'        => null, // the name of the addr field
+            'lat_name'         => 'latitude', // the name of the lat field
+            'lng_name'         => 'longitude', // the name of the lng field
+            'addr_name'        => 'address', // the name of the addr field
             'error_bubbling'   => false,
             'map_width'        => '100%', // the width of the map
             'map_height'       => '400px', // the height of the map
-            'default_lat'      => 51.5, // the starting position on the map
-            'default_lng'      => -0.1245, // the starting position on the map
+            'default_lat'      => 41.390205, // the starting position on the map
+            'default_lng'      => 2.154007, // the starting position on the map
             'include_jquery'   => false, // jquery needs to be included above the field (ie not at the bottom of the page)
             'include_gmaps_js' => true     // is this the best place to include the google maps javascript?
         ]);

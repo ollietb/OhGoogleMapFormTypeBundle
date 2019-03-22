@@ -9,5 +9,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class LatLng extends Constraint
 {
-    public $message = 'The values for latitude and longitude ("%lat%" and "%lng%") are not valid.';
+    public $message = 'The values for latitude and longitude ("%latitude%" and "%longitude%") are not valid.';
 }
