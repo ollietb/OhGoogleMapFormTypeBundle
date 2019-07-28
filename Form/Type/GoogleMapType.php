@@ -2,7 +2,10 @@
 
 namespace Oh\GoogleMapFormTypeBundle\Form\Type;
 
+use Mea\CoreBundle\Form\Type\StringType;
+use Mea\CoreBundle\Service\ErrorService;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,13 +23,31 @@ class GoogleMapType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        unset($options['options']['compound']);
 
-       unset($options['options']['compound']);
+        if($options['editable'])
+            $builder
+                ->add($options['lat_name'], $options['type'], array_merge($options['options'], $options['lat_options']))
+                ->add($options['lng_name'], $options['type'], array_merge($options['options'], $options['lng_options']))
+            ;
 
-        $builder
-            ->add($options['lat_name'], $options['type'], array_merge($options['options'], $options['lat_options']))
-            ->add($options['lng_name'], $options['type'], array_merge($options['options'], $options['lng_options']))
-        ;
+        else{
+
+            $entity = $builder->getData();
+
+            ErrorService::getInstance()->addDebug($builder);
+
+            $builder
+                ->add($options['lat_name'],HiddenType::class, array_merge($options['options'], $options['lat_options']))
+                ->add($options['lng_name'], HiddenType::class, array_merge($options['options'], $options['lng_options']))
+//               ->add('Coordinates',StringType::class,[
+//                   'data'=>'sdfdfs',
+//                   'required'=>false,
+//                   'mapped'=>false,
+//               ])
+            ;
+
+        }
     }
 
     /**
@@ -35,6 +56,7 @@ class GoogleMapType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'editable'           => true,
             'type'           => TextType::class,  // the types to render the lat and lng fields as
             'compound'=>true,
             'options'        => array(
@@ -60,15 +82,16 @@ class GoogleMapType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-            $view->vars['lat_name'] = $options['lat_name']; 
-            $view->vars['lng_name'] = $options['lng_name']; 
-            $view->vars['map_width'] = $options['map_width']; 
-            $view->vars['map_height'] = $options['map_height']; 
-            $view->vars['default_lat'] = $options['default_lat']; 
-            $view->vars['default_lng'] = $options['default_lng']; 
-            $view->vars['include_jquery'] = $options['include_jquery']; 
-            $view->vars['include_gmaps_js'] = $options['include_gmaps_js'];
-            $view->vars['zoom_callback'] = $options['zoom_callback'];
+        $view->vars['editable'] = $options['editable'];
+        $view->vars['lat_name'] = $options['lat_name'];
+        $view->vars['lng_name'] = $options['lng_name'];
+        $view->vars['map_width'] = $options['map_width'];
+        $view->vars['map_height'] = $options['map_height'];
+        $view->vars['default_lat'] = $options['default_lat'];
+        $view->vars['default_lng'] = $options['default_lng'];
+        $view->vars['include_jquery'] = $options['include_jquery'];
+        $view->vars['include_gmaps_js'] = $options['include_gmaps_js'];
+        $view->vars['zoom_callback'] = $options['zoom_callback'];
     }
 
     public function getParent()
@@ -78,6 +101,7 @@ class GoogleMapType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'oh_google_maps';
+        return 'oh_google_maps'; 
+        
     }
 }
