@@ -26,9 +26,10 @@ class OhGoogleMapFormTypeExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container
-            ->getDefinition('form.type.oh_google_maps')
-            ->addArgument($config['api_key']);
-
+        if (!empty($config['api_key'])) {
+            $container
+                ->getDefinition('form.type.oh_google_maps')
+                ->addArgument($config['api_key']);
+        }
     }
 }
