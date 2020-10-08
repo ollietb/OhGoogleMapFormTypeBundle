@@ -27,8 +27,8 @@ class GoogleMapType extends AbstractType
 
         if($options['editable'])
             $builder
-                ->add($options['lat_name'], $options['type'], array_merge($options['options'], $options['lat_options']))
-                ->add($options['lng_name'], $options['type'], array_merge($options['options'], $options['lng_options']))
+                ->add($options['lat_name'], HiddenType::class, array_merge($options['options'], $options['lat_options']))
+                ->add($options['lng_name'],HiddenType::class, array_merge($options['options'], $options['lng_options']))
             ;
 
         else{
