@@ -72,6 +72,7 @@ class GoogleMapType extends AbstractType
             'map_height'     => 300,     // the height of the map
             'default_lat'    => 51.5,    // the starting position on the map
             'default_lng'    => -0.1245, // the starting position on the map
+            'default_zoom'    => 10, // the starting position on the map
             'include_jquery' => false,   // jquery needs to be included above the field (ie not at the bottom of the page)
             'include_gmaps_js'=>true     // is this the best place to include the google maps javascript?
         ));
@@ -89,6 +90,7 @@ class GoogleMapType extends AbstractType
         $view->vars['map_height'] = $options['map_height'];
         $view->vars['default_lat'] = $options['default_lat'];
         $view->vars['default_lng'] = $options['default_lng'];
+        $view->vars['default_zoom'] = $options['default_zoom'];
         $view->vars['include_jquery'] = $options['include_jquery'];
         $view->vars['include_gmaps_js'] = $options['include_gmaps_js'];
         $view->vars['zoom_callback'] = $options['zoom_callback'];
