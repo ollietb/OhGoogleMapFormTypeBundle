@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Autosearch from request - ?mapSearchInput=Warszawa ul. nowogrodzka
+ */
 namespace Oh\GoogleMapFormTypeBundle\Form\Type;
 
 use Mea\CoreBundle\Form\Type\StringType;
@@ -23,6 +25,7 @@ class GoogleMapType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         unset($options['options']['compound']);
 
         if($options['editable'])
@@ -94,6 +97,10 @@ class GoogleMapType extends AbstractType
         $view->vars['include_jquery'] = $options['include_jquery'];
         $view->vars['include_gmaps_js'] = $options['include_gmaps_js'];
         $view->vars['zoom_callback'] = $options['zoom_callback'];
+
+
+
+
     }
 
     public function getParent()
