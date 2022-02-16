@@ -4,6 +4,7 @@
  */
 namespace Oh\GoogleMapFormTypeBundle\Form\Type;
 
+use AppBundle\Model\AppConfig;
 use Mea\CoreBundle\Form\Type\StringType;
 use Mea\CoreBundle\Service\ErrorService;
 use Symfony\Component\Form\AbstractType;
@@ -73,9 +74,9 @@ class GoogleMapType extends AbstractType
             'zoom_callback' => false,    //form callback
             'map_width'      => 300,     // the width of the map
             'map_height'     => 300,     // the height of the map
-            'default_lat'    => 51.5,    // the starting position on the map
-            'default_lng'    => -0.1245, // the starting position on the map
-            'default_zoom'    => 10, // the starting position on the map
+            'default_lat'    => AppConfig::LOCATION_DEFAULT_LAT,    // the starting position on the map
+            'default_lng'    => AppConfig::LOCATION_DEFAULT_LNG, // the starting position on the map
+            'default_zoom'    => AppConfig::LOCATION_DEFAULT_ZOOM, // the starting position on the map
             'include_jquery' => false,   // jquery needs to be included above the field (ie not at the bottom of the page)
             'include_gmaps_js'=>true     // is this the best place to include the google maps javascript?
         ));
