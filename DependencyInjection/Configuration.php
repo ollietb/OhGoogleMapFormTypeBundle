@@ -18,9 +18,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('oh_google_map_form_type');
         
-        $rootNode = $treeBuilder->root('oh_google_map_form_type');
+        $rootNode = $treeBuilder->getRootNode();
 
 
         $rootNode
